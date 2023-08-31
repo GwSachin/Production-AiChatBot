@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import { useMemo } from "react";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { Toaster } from "react-hot-toast";
+import { themeSettings } from "./theme";
+import Navbar from "./Components/Navbar";
+import Homepage from "./Pages/Homepage";
+import Register from "./Pages/Register";
+import Login from "./Pages/Login";
+import Summary from "./Pages/Summary";
+import Paragraph from "./Pages/Paragraph";
+import ChatBot from "./Pages/ChatBot";
+import JsConverter from "./Pages/JsConverter";
+import ScifiImage from "./Pages/ScifiImage";
 
 function App() {
+  const theme = useMemo(() => createTheme(themeSettings()), []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Navbar />
+        <Toaster />
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/summary" element={<Summary />} />
+          <Route path="/paragraph" element={<Paragraph />} />
+          <Route path="/chatbot" element={<ChatBot />} />
+          <Route path="/js-converter" element={<JsConverter />} />
+          <Route path="/scifi-image" element={<ScifiImage />} />
+        </Routes>
+      </ThemeProvider>
+    </>
   );
 }
 
